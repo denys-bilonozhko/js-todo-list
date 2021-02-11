@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+  <title>Todo List</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <nav class="header navbar navbar-dark bg-primary">
+    <div class="container">
+      <a href="#" class="navbar-brand">Navbar</a>
+      <form action="#" class="form-inline d-flex align-items-center">
+        <span class="text-light me-2">Theme:</span>
+        <select name="themeSelect" id="themeSelect" class="form-select">
+          <option value="default">Default</option>
+          <option value="dark">Dark</option>
+        </select>
+      </form>
+    </div>
+  </nav>
+
+  <div class="form-section mt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col col-8 mx-auto">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Add new task</h5>
+              <form name="addTask">
+                <input type="text" name="title" id="title" class="form-control" placeholder="Task title">
+                <input type="text" name="body" id="body" class="form-control mt-3" placeholder="Task text">
+                <button type="submit" class="btn btn-primary mt-4">
+                  Add task
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tasks-list-section mt-5">
+    <div class="container">
+      <ul class="list-group mb-5">
+      </ul>
+    </div>
+  </div>
+  
+  <script src="app.js"></script>
+</body>
+
+</html>
