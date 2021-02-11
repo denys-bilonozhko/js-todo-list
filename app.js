@@ -4,46 +4,53 @@ const tasks = [
     completed: false,
     title: 'Task 1',
     text:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, temporibus.'
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, temporibus.',
   },
   {
     id: 2,
     completed: false,
     title: 'Task 2',
     text:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, temporibus.'
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, temporibus.',
   },
   {
     id: 3,
     completed: false,
     title: 'Task 3',
     text:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, temporibus.'
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, temporibus.',
   },
   {
     id: 4,
     completed: true,
     title: 'Task 4',
     text:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, temporibus.'
-  }
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, temporibus.',
+  },
 ];
 
 (function (tasksArr) {
   const tasksObj = tasksArr.reduce((acc, task) => {
     acc[task.id] = task;
+
     return acc;
   }, {});
-  
+
   const listContainer = document.querySelector(
     '.tasks-list-section .list-group'
   );
 
+  const form = document.forms.addTask;
+  const inputTitle = form.elements.title;
+  const inputBody = form.elements.body;
+
   renderAllTasks(tasksObj);
+  form.addEventListener('submit', onFormSubmitHandler);
 
   function renderAllTasks(tasksList) {
     if (!tasksList) {
       console.log('No tasks');
+
       return;
     }
 
@@ -85,4 +92,39 @@ const tasks = [
     return li;
   }
 
+  function onFormSubmitHandler(e) {
+    e.preventDefault();
+    const titleValue = inputTitle.value;
+    const textValue = inputBody.value;
+
+    if (!titleValue || !textValue) {
+      alert('Enter title/text');
+
+      return;
+    }
+
+    const task = createNewTask(titleValue, textValue);
+    const listItem = listItemTemplate(task);
+    listContainer.insertAdjacentElement('afterbegin', listItem);
+    form.reset();
+  }
+
+  function createNewTask(title, text) {
+    let newTask = {
+      id: generateId(tasksObj),
+      completed: false,
+      title,
+      text,
+    };
+    tasksObj[newTask.id] = newTask;
+
+    return { ...newTask };
+  }
+
+  function generateId(arr) {
+    let idList = Object.keys(arr);
+
+    return +idList[idList.length - 1] + 1;
+  }
+  
 })(tasks);
