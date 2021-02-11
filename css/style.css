@@ -1,0 +1,11 @@
+.theme-dark {
+    background-color: rgb(122, 121, 121);
+}
+
+.theme-dark .bg-primary {
+    background-color: rgb(53, 53, 53) !important;
+}
+
+.theme-dark .list-group-item, .theme-dark .card {
+    background-color: rgb(209, 207, 207);
+}

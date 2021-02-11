@@ -36,6 +36,9 @@ const tasks = [
     return acc;
   }, {});
 
+  let lastSelectedTheme = localStorage.getItem('todo_theme') || 'default';
+
+
   const listContainer = document.querySelector(
     '.tasks-list-section .list-group'
   );
@@ -43,9 +46,12 @@ const tasks = [
   const form = document.forms.addTask;
   const inputTitle = form.elements.title;
   const inputBody = form.elements.body;
+  const themeSelect = document.getElementById("themeSelect");
 
+  setTheme(lastSelectedTheme);
   renderAllTasks(tasksObj);
   form.addEventListener('submit', onFormSubmitHandler);
+  themeSelect.addEventListener('change', onThemeSelectHandler);
 
   function renderAllTasks(tasksList) {
     if (!tasksList) {
@@ -126,5 +132,21 @@ const tasks = [
 
     return +idList[idList.length - 1] + 1;
   }
-  
+
+  function onThemeSelectHandler(e) {
+    const selectedTheme = themeSelect.value;
+    setTheme(selectedTheme);
+    localStorage.setItem('todo_theme', selectedTheme);
+  }
+
+  function setTheme(theme) {
+    if (theme === 'default') {
+      document.body.removeAttribute('class');
+      return;
+    }
+
+    themeSelect.value = theme;
+    document.body.classList.add(theme);
+  }
+
 })(tasks);
